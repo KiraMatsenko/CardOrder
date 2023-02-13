@@ -12,7 +12,7 @@ public class DeliveryTest {
     @Test
     void shouldSendWithSimpleCity() {
         Configuration.holdBrowserOpen = true;
-        open("http://localhost:9999/");
+        open("http://localhost:7777/");
         $("span[data-test-id=city] input").setValue("Сыктывкар");
         $("span[data-test-id=date] input").sendKeys(Keys.CONTROL, Keys.BACK_SPACE);
         $("span[data-test-id=date] input").setValue("18.02.2023");
@@ -26,7 +26,7 @@ public class DeliveryTest {
     @Test
     void shouldSendWithDoubleCity() {
         Configuration.holdBrowserOpen = true;
-        open("http://localhost:9999/");
+        open("http://localhost:7777/");
         $("span[data-test-id=city] input").setValue("Санкт-Петербург");
         $("span[data-test-id=date] input").sendKeys(Keys.CONTROL, Keys.BACK_SPACE);
         $("span[data-test-id=date] input").setValue("18.02.2023");
@@ -40,7 +40,7 @@ public class DeliveryTest {
     @Test
     void shouldSendWithDoubleName() {
         Configuration.holdBrowserOpen = true;
-        open("http://localhost:9999/");
+        open("http://localhost:7777/");
         $("span[data-test-id=city] input").setValue("Кострома");
         $("span[data-test-id=date] input").sendKeys(Keys.CONTROL, Keys.BACK_SPACE);
         $("span[data-test-id=date] input").setValue("18.02.2023");
@@ -52,9 +52,9 @@ public class DeliveryTest {
     }
 
     @Test
-    void test() {
+    void optionalTest() {
         Configuration.holdBrowserOpen = true;
-        open("http://localhost:9999/");
+        open("http://localhost:7777/");
         $("span[data-test-id=city] input").setValue("Ка");
         $x("//span[text()='Казань']").click();
         $("[class=input__icon]").click();
