@@ -6,7 +6,9 @@ import org.openqa.selenium.Keys;
 
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 import static com.codeborne.selenide.Condition.disappear;
 import static com.codeborne.selenide.Condition.visible;
@@ -23,7 +25,7 @@ public class DeliveryTest {
         Configuration.holdBrowserOpen = true;
         open("http://localhost:7777/");
         $("span[data-test-id=city] input").setValue("Сыктывкар");
-        $("span[data-test-id=date] input").sendKeys(Keys.CONTROL, Keys.BACK_SPACE);
+        $("span[data-test-id='date'] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
         $("span[data-test-id=date] input").setValue(generateDate(4));
         $("[name=name]").setValue("Чупров Олег");
         $("[name=phone]").setValue("+79111111111");
@@ -38,7 +40,7 @@ public class DeliveryTest {
         Configuration.holdBrowserOpen = true;
         open("http://localhost:7777/");
         $("span[data-test-id=city] input").setValue("Санкт-Петербург");
-        $("span[data-test-id=date] input").sendKeys(Keys.CONTROL, Keys.BACK_SPACE);
+        $("span[data-test-id='date'] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
         $("span[data-test-id=date] input").setValue(generateDate(4));
         $("[name=name]").setValue("Чупров Олег");
         $("[name=phone]").setValue("+79111111111");
@@ -53,7 +55,7 @@ public class DeliveryTest {
         Configuration.holdBrowserOpen = true;
         open("http://localhost:7777/");
         $("span[data-test-id=city] input").setValue("Кострома");
-        $("span[data-test-id=date] input").sendKeys(Keys.CONTROL, Keys.BACK_SPACE);
+        $("span[data-test-id='date'] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
         $("span[data-test-id=date] input").setValue(generateDate(4));
         $("[name=name]").setValue("Петров-Водкин Кузьма");
         $("[name=phone]").setValue("+79111111111");
@@ -65,12 +67,15 @@ public class DeliveryTest {
 
     @Test
     void optionalTest() {
-        String date = "'" + LocalDate.now().plusDays(7).format(DateTimeFormatter.ofPattern("dd")) + "'" + "]";
+        String date = "'" + LocalDate.now().plusDays(7).format(DateTimeFormatter.ofPattern("d")) + "']";
         Configuration.holdBrowserOpen = true;
         open("http://localhost:7777/");
         $("span[data-test-id=city] input").setValue("Ка");
         $x("//span[text()='Казань']").click();
         $("[class=input__icon]").click();
+        if (!LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("MM")).equals(LocalDate.now().plusDays(7).format(DateTimeFormatter.ofPattern("MM")))) {
+            $x("//div[@class='calendar__arrow calendar__arrow_direction_right']").click();
+        }
         $x("//td[text()=" + date).click();
         $("[name=name]").setValue("Чупров Олег");
         $("[name=phone]").setValue("+79111111111");
